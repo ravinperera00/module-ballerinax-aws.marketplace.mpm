@@ -48,5 +48,5 @@ generated
 
 # Environment files
 *.env
-Config.toml
+**/Config.toml
 examples/**/Dependencies.toml
