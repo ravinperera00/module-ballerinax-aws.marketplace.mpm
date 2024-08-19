@@ -31,6 +31,44 @@ public interface Constants {
     BString MPM_RESOLVE_CUSTOMER_IDNFR = StringUtils.fromString("customerIdentifier");
     BString MPM_RESOLVE_CUSTOMER_PRODUCT_CODE = StringUtils.fromString("productCode");
 
+    // Constants related to MPM `BatchMeterUsageRequest`
+    BString MPM_BATCH_METER_USAGE_PRODUCT_CODE = StringUtils.fromString("productCode");
+    BString MPM_BATCH_METER_USAGE_RECORDS = StringUtils.fromString("usageRecords");
+
+    // Constants related to MPM `UsageRecord`
+    String MPM_USAGE_RECORD = "UsageRecord";
+    BString MPM_USAGE_RECORD_CUSTOMER_IDFR = StringUtils.fromString("customerIdentifier");
+    BString MPM_USAGE_RECORD_DIMENSION = StringUtils.fromString("dimension");
+    BString MPM_USAGE_RECORD_TIMESTAMP = StringUtils.fromString("timestamp");
+    BString MPM_USAGE_RECORD_QUANTITY = StringUtils.fromString("quantity");
+    BString MPM_USAGE_RECORD_USAGE_ALLOCATION = StringUtils.fromString("usageAllocations");
+
+    // Constants related to MPM `UsageAllocation`
+    String MPM_USAGE_ALLOC = "UsageAllocation";
+    BString MPM_USAGE_ALLOC_USAGE_QUANTITY = StringUtils.fromString("allocatedUsageQuantity");
+    BString MPM_USAGE_ALLOC_TAGS = StringUtils.fromString("tags");
+
+    // Constants related to MPM `Tag`
+    String MPM_TAG = "Tag";
+    BString MPM_TAG_KEY = StringUtils.fromString("key");
+    BString MPM_TAG_VALUE = StringUtils.fromString("value");
+
+    // Constants related to MPM `BatchMeterUsageResponse`
+    String MPM_BATCH_METER_USAGE_RESPONSE = "BatchMeterUsageResponse";
+    BString MPM_BATCH_METER_USAGE_RESPONSE_RESULTS = StringUtils.fromString("results");
+    BString MPM_BATCH_METER_USAGE_RESPONSE_UNPROC_RECORDS = StringUtils.fromString("unprocessedRecords");
+
+    // Constants related to MPM `UsageRecordResult`
+    String MPM_USAGE_RECORD_RESULT = "UsageRecordResult";
+    BString MPM_USAGE_RECORD_RESULT_METERING_RECORD = StringUtils.fromString("meteringRecordId");
+    BString MPM_USAGE_RECORD_RESULT_STATUS = StringUtils.fromString("status");
+    BString MPM_USAGE_RECORD_RESULT_USAGE_RECORD = StringUtils.fromString("usageRecord");
+
+    // Ballerina time module related constants
+    String BTIME_ORG_NAME = "ballerina";
+    String BTIME_PKG_NAME = "time";
+    String BTIME_UTC = "Utc";
+
     // Constants related to MPE Error
     String MPM_ERROR = "Error";
     String MPM_ERROR_DETAILS = "ErrorDetails";

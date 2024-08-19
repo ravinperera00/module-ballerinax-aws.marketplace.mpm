@@ -14,6 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/constraint;
 import ballerina/jballerina.java;
 
 # AWS Marketplace metering client.
@@ -51,7 +52,26 @@ public isolated client class Client {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
     } external;
 
-    // todo: implemenent the required remote functions
+    # Retrieves the post-metering records for a set of customers.
+    # ```ballerina
+    # mpm:BatchMeterUsageResponse response = check mpm->batchMeterUsage(productCode = "<aws-product-code>");
+    # ```
+    # 
+    # + request - The request parameters for the `BatchMeterUsage` operation
+    # + return - A Ballerina `mpm:Error` if there was an error while executing the operation or else `mpm:BatchMeterUsageResponse`
+    remote function batchMeterUsage(*BatchMeterUsageRequest request) returns BatchMeterUsageResponse|Error {
+        BatchMeterUsageRequest|constraint:Error validated = constraint:validate(request);
+        if validated is constraint:Error {
+            return error Error(string `Request validation failed: ${validated.message()}`);
+        }
+        return self.externBatchMeterUsage(validated);
+    }
+
+    isolated function externBatchMeterUsage(BatchMeterUsageRequest request) returns BatchMeterUsageResponse|Error = 
+    @java:Method {
+        name: "batchMeterUsage",
+        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+    } external;
 
     # Closes the AWS MPE client connection.
     # ```ballerina
