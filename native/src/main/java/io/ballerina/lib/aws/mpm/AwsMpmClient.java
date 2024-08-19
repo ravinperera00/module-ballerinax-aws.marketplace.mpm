@@ -18,6 +18,11 @@
 
 package io.ballerina.lib.aws.mpm;
 
+import io.ballerina.runtime.api.Environment;
+import io.ballerina.runtime.api.Future;
+import io.ballerina.runtime.api.creators.ValueCreator;
+import io.ballerina.runtime.api.utils.StringUtils;
+import io.ballerina.runtime.api.values.BError;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BObject;
 import io.ballerina.runtime.api.values.BString;
@@ -27,11 +32,16 @@ import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.services.marketplacemetering.MarketplaceMeteringClient;
+import software.amazon.awssdk.services.marketplacemetering.model.ResolveCustomerRequest;
+import software.amazon.awssdk.services.marketplacemetering.model.ResolveCustomerResponse;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public final class AwsMpmClient {
     private static final String NATIVE_CLIENT = "nativeClient";
+    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool(new AwsMpmThreadFactory());
 
     private AwsMpmClient() {
     }
@@ -67,6 +77,48 @@ public final class AwsMpmClient {
         } else {
             return AwsBasicCredentials.create(connectionConfig.accessKeyId(), connectionConfig.secretAccessKey());
         }
+    }
+
+    /**
+     * Retrieves customer details mapped to a registration token.
+     *
+     * @param env The Ballerina runtime environment.
+     * @param bAwsMpmClient The Ballerina AWS MPM client object.
+     * @param registrationToken The registration-token provided by the customer.
+     * @return A Ballerina `mpm:Error` if there was an error while executing the operation or else the AWS MPM
+     *         resolve-customer response.
+     */
+    public static Object resolveCustomer(Environment env, BObject bAwsMpmClient, BString registrationToken) {
+        MarketplaceMeteringClient nativeClient = (MarketplaceMeteringClient) bAwsMpmClient
+                .getNativeData(NATIVE_CLIENT);
+        Future future = env.markAsync();
+        EXECUTOR_SERVICE.execute(() -> {
+            try {
+                ResolveCustomerRequest resolveCustomerReq = ResolveCustomerRequest.builder()
+                        .registrationToken(registrationToken.getValue()).build();
+                ResolveCustomerResponse nativeResponse = nativeClient.resolveCustomer(resolveCustomerReq);
+                BMap<BString, Object> bResponse = getBResolveCustomerResponse(nativeResponse);
+                future.complete(bResponse);
+            } catch (Exception e) {
+                String errorMsg = String.format("Error occurred while executing resolve customer operation: %s",
+                        e.getMessage());
+                BError bError = CommonUtils.createError(errorMsg, e);
+                future.complete(bError);
+            }
+        });
+        return null;
+    }
+
+    private static BMap<BString, Object> getBResolveCustomerResponse(ResolveCustomerResponse nativeResponse) {
+        BMap<BString, Object> resolveCustomerResponse = ValueCreator.createRecordValue(
+                ModuleUtils.getModule(), Constants.MPM_RESOLVE_CUSTOMER);
+        resolveCustomerResponse.put(Constants.MPM_RESOLVE_CUSTOMER_AWS_ACNT_ID,
+                StringUtils.fromString(nativeResponse.customerAWSAccountId()));
+        resolveCustomerResponse.put(Constants.MPM_RESOLVE_CUSTOMER_IDNFR,
+                StringUtils.fromString(nativeResponse.customerIdentifier()));
+        resolveCustomerResponse.put(Constants.MPM_RESOLVE_CUSTOMER_PRODUCT_CODE,
+                StringUtils.fromString(nativeResponse.productCode()));
+        return resolveCustomerResponse;
     }
 
     /**

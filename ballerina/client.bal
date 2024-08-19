@@ -39,6 +39,26 @@ public isolated client class Client {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
     } external;
 
+    # Retrieves customer details mapped to a registration token.
+    # ```ballerina
+    # mpm:ResolveCustomerResponse response = check mpm->resolveCustomer("<registration-token>");
+    # ```
+    # 
+    # + registrationToken - The registration-token provided by the customer
+    # + return - A Ballerina `mpm:Error` if there was an error while executing the operation or else `mpm:ResolveCustomerResponse`
+    remote function resolveCustomer(string registrationToken) returns ResolveCustomerResponse|Error =
+    @java:Method {
+        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+    } external;
+
+    // todo: implemenent the required remote functions
+
+    # Closes the AWS MPE client connection.
+    # ```ballerina
+    # check mpm->close();
+    # ```
+    # 
+    # + return - A `mpm:Error` if there is an error while closing the connection or else nil.
     remote function close() returns Error? =
     @java:Method {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"

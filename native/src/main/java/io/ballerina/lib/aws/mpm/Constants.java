@@ -25,6 +25,12 @@ import io.ballerina.runtime.api.values.BString;
  * Represents the constants related to Ballerina MPE connector.
  */
 public interface Constants {
+    // Constants related to MPM `ResolveCustomerResponse`
+    String MPM_RESOLVE_CUSTOMER = "ResolveCustomerResponse";
+    BString MPM_RESOLVE_CUSTOMER_AWS_ACNT_ID = StringUtils.fromString("customerAWSAccountId");
+    BString MPM_RESOLVE_CUSTOMER_IDNFR = StringUtils.fromString("customerIdentifier");
+    BString MPM_RESOLVE_CUSTOMER_PRODUCT_CODE = StringUtils.fromString("productCode");
+
     // Constants related to MPE Error
     String MPM_ERROR = "Error";
     String MPM_ERROR_DETAILS = "ErrorDetails";
