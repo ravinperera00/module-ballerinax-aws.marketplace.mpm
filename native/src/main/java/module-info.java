@@ -19,6 +19,11 @@
 module io.ballerina.lib.aws.mpm {
     requires io.ballerina.runtime;
     requires io.ballerina.lang.value;
+    requires software.amazon.awssdk.auth;
+    requires software.amazon.awssdk.regions;
+    requires software.amazon.awssdk.services.marketplacemetering;
+    requires software.amazon.awssdk.awscore;
+    requires software.amazon.awssdk.core;
 
     exports io.ballerina.lib.aws.mpm;
 }
