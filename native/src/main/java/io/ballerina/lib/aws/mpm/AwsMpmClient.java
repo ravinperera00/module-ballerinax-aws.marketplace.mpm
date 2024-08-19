@@ -73,7 +73,7 @@ public final class AwsMpmClient {
      * Closes the AWS MPM client native resources.
      *
      * @param bAwsMpeClient The Ballerina AWS MPE client object.
-     * @return A Ballerina `mpe:Error` if failed to close the underlying resources.
+     * @return A Ballerina `mpm:Error` if failed to close the underlying resources.
      */
     public static Object close(BObject bAwsMpeClient) {
         MarketplaceMeteringClient nativeClient = (MarketplaceMeteringClient) bAwsMpeClient
