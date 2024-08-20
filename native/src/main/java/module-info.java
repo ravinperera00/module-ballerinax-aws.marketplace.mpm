@@ -19,6 +19,7 @@
 module io.ballerina.lib.aws.mpm {
     requires io.ballerina.runtime;
     requires io.ballerina.lang.value;
+    requires io.ballerina.stdlib.time;
     requires software.amazon.awssdk.auth;
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.services.marketplacemetering;

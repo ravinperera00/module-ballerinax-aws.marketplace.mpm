@@ -64,11 +64,6 @@ public interface Constants {
     BString MPM_USAGE_RECORD_RESULT_STATUS = StringUtils.fromString("status");
     BString MPM_USAGE_RECORD_RESULT_USAGE_RECORD = StringUtils.fromString("usageRecord");
 
-    // Ballerina time module related constants
-    String BTIME_ORG_NAME = "ballerina";
-    String BTIME_PKG_NAME = "time";
-    String BTIME_UTC = "Utc";
-
     // Constants related to MPE Error
     String MPM_ERROR = "Error";
     String MPM_ERROR_DETAILS = "ErrorDetails";

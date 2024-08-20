@@ -18,19 +18,18 @@
 
 package io.ballerina.lib.aws.mpm;
 
-import io.ballerina.runtime.api.Module;
 import io.ballerina.runtime.api.creators.ErrorCreator;
 import io.ballerina.runtime.api.creators.TypeCreator;
 import io.ballerina.runtime.api.creators.ValueCreator;
 import io.ballerina.runtime.api.flags.SymbolFlags;
 import io.ballerina.runtime.api.types.ArrayType;
 import io.ballerina.runtime.api.types.RecordType;
-import io.ballerina.runtime.api.types.TupleType;
 import io.ballerina.runtime.api.utils.StringUtils;
 import io.ballerina.runtime.api.values.BArray;
 import io.ballerina.runtime.api.values.BError;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BString;
+import io.ballerina.stdlib.time.nativeimpl.Utc;
 import software.amazon.awssdk.awscore.exception.AwsErrorDetails;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.services.marketplacemetering.model.BatchMeterUsageRequest;
@@ -64,9 +63,6 @@ public final class CommonUtils {
     private static final RecordType TAG_REC_TYPE = TypeCreator.createRecordType(
             Constants.MPM_TAG, ModuleUtils.getModule(), SymbolFlags.PUBLIC, true, 0);
     private static final ArrayType TAG_ARR_TYPE = TypeCreator.createArrayType(TAG_REC_TYPE);
-    private static final TupleType BUTC_TYPE = TypeCreator.createTupleType(
-            Constants.BTIME_UTC, new Module(Constants.BTIME_ORG_NAME, Constants.BTIME_PKG_NAME),
-            0, false, true);
 
     private CommonUtils() {
     }
@@ -183,13 +179,7 @@ public final class CommonUtils {
         bUsageRecord.put(Constants.MPM_USAGE_RECORD_CUSTOMER_IDFR,
                 StringUtils.fromString(nativeUsageRecord.customerIdentifier()));
         bUsageRecord.put(Constants.MPM_USAGE_RECORD_DIMENSION, StringUtils.fromString(nativeUsageRecord.dimension()));
-        Instant timestamp = nativeUsageRecord.timestamp();
-        long epochSecond = timestamp.getEpochSecond();
-        int nanos = timestamp.getNano();
-        BArray utcTime = ValueCreator.createTupleValue(BUTC_TYPE);
-        utcTime.append(epochSecond);
-        utcTime.append(nanos);
-        bUsageRecord.put(Constants.MPM_USAGE_RECORD_TIMESTAMP, utcTime);
+        bUsageRecord.put(Constants.MPM_USAGE_RECORD_TIMESTAMP, new Utc(nativeUsageRecord.timestamp()));
         Integer quantity = nativeUsageRecord.quantity();
         if (Objects.nonNull(quantity)) {
             bUsageRecord.put(Constants.MPM_USAGE_RECORD_QUANTITY, quantity);
