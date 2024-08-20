@@ -75,10 +75,10 @@ public enum Region {
 public type AuthConfig record {|
     # The AWS access key, used to identify the user interacting with AWS
     string accessKeyId;
-    # The  The AWS secret access key, used to authenticate the user interacting with AWS
+    # The AWS secret access key, used to authenticate the user interacting with AWS
     string secretAccessKey;
-    # The AWS session token, retrieved from an AWS token service, used for authenticating that 
-    # this user has received temporary permission to access some resource
+    # The AWS session token, retrieved from an AWS token service, used for authenticating 
+    # a user with temporary permission to a resource
     string sessionToken?;
 |};
 

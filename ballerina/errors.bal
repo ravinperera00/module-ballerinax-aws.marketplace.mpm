@@ -15,17 +15,16 @@
 // under the License.
 
 # Represents a AWS Marketplace Metering distinct error.
-public type Error error<ErrorDetails>;
+public type Error distinct error<ErrorDetails>;
 
 # The error details type for the AWS MPM module.
-#
-# + httpStatusCode - The HTTP status code for the error
-# + httpStatusText - The HTTP status text returned from the service
-# + errorCode - The error code associated with the response
-# + errorMessage - The human-readable error message provided by the service
 public type ErrorDetails record {|
+    # The HTTP status code for the error
     int httpStatusCode?;
+    # The HTTP status text returned from the service
     string httpStatusText?;
+    # The error code associated with the response
     string errorCode?;
+    # The human-readable error message provided by the service
     string errorMessage?;
 |};
