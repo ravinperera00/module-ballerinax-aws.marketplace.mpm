@@ -5,7 +5,7 @@ a usage and billing service that allows AWS Marketplace sellers to report the us
 billing purposes. This service supports both software-as-a-service (SaaS) products and metering products sold through 
 AWS Marketplace.
 
-The `ballerinax/aws.marketplace.metering` package provides APIs to interact with the AWS Marketplace Metering Service, 
+The `ballerinax/aws.marketplace.mpm` package provides APIs to interact with the AWS Marketplace Metering Service, 
 enabling developers to submit usage records, batch meter usage data, and manage metering-related tasks programmatically.
 
 ## Setup guide
@@ -44,7 +44,7 @@ mpm:Client mpm = check new(region = mpm:US_EAST_1, auth = {
 Now, utilize the available connector operations.
 
 ```ballerina
-mpm:ResolveCustomerResponse response = check mpm->resolveCustomer("xxxxxx");
+mpm:ResolveCustomerResponse response = check mpm->resolveCustomer("<registration-token>");
 ```
 
 ### Step 4: Run the Ballerina application
