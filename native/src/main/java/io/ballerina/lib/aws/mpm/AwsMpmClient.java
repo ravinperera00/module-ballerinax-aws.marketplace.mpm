@@ -50,7 +50,7 @@ public final class AwsMpmClient {
      * Creates an AWS MPM native client with the provided configurations.
      *
      * @param bAwsMpmClient The Ballerina AWS MPM client object.
-     * @param configurations AWS MPE client connection configurations.
+     * @param configurations AWS MPM client connection configurations.
      * @return A Ballerina `mpm:Error` if failed to initialize the native client with the provided configurations.
      */
     public static Object init(BObject bAwsMpmClient, BMap<BString, Object> configurations) {

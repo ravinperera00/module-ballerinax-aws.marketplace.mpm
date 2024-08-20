@@ -73,7 +73,7 @@ public isolated client class Client {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
     } external;
 
-    # Closes the AWS MPE client resources.
+    # Closes the AWS MPM client resources.
     # ```ballerina
     # check mpm->close();
     # ```
