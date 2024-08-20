@@ -39,11 +39,15 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public final class AwsMpmClient {
+/**
+ * Representation of {@link software.amazon.awssdk.services.marketplacemetering.MarketplaceMeteringClient} with
+ * utility methods to invoke as inter-op functions.
+ */
+public final class NativeClientAdaptor {
     private static final String NATIVE_CLIENT = "nativeClient";
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool(new AwsMpmThreadFactory());
 
-    private AwsMpmClient() {
+    private NativeClientAdaptor() {
     }
 
     /**

@@ -37,7 +37,7 @@ public isolated client class Client {
     isolated function externInit(ConnectionConfig configs) returns Error? =
     @java:Method {
         name: "init",
-        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+        'class: "io.ballerina.lib.aws.mpm.NativeClientAdaptor"
     } external;
 
     # Retrieves customer details mapped to a registration token.
@@ -49,7 +49,7 @@ public isolated client class Client {
     # + return - A Ballerina `mpm:Error` if there was an error while executing the operation or else `mpm:ResolveCustomerResponse`
     remote function resolveCustomer(string registrationToken) returns ResolveCustomerResponse|Error =
     @java:Method {
-        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+        'class: "io.ballerina.lib.aws.mpm.NativeClientAdaptor"
     } external;
 
     # Retrieves the post-metering records for a set of customers.
@@ -70,7 +70,7 @@ public isolated client class Client {
     isolated function externBatchMeterUsage(BatchMeterUsageRequest request) returns BatchMeterUsageResponse|Error = 
     @java:Method {
         name: "batchMeterUsage",
-        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+        'class: "io.ballerina.lib.aws.mpm.NativeClientAdaptor"
     } external;
 
     # Closes the AWS MPM client resources.
@@ -81,6 +81,6 @@ public isolated client class Client {
     # + return - A `mpm:Error` if there is an error while closing the client resources or else nil.
     remote function close() returns Error? =
     @java:Method {
-        'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
+        'class: "io.ballerina.lib.aws.mpm.NativeClientAdaptor"
     } external;
 }
