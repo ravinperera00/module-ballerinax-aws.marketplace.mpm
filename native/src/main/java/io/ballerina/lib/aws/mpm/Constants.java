@@ -22,7 +22,7 @@ import io.ballerina.runtime.api.utils.StringUtils;
 import io.ballerina.runtime.api.values.BString;
 
 /**
- * Represents the constants related to Ballerina MPE connector.
+ * Represents the constants related to Ballerina MPM connector.
  */
 public interface Constants {
     // Constants related to MPM `ResolveCustomerResponse`
@@ -64,7 +64,7 @@ public interface Constants {
     BString MPM_USAGE_RECORD_RESULT_STATUS = StringUtils.fromString("status");
     BString MPM_USAGE_RECORD_RESULT_USAGE_RECORD = StringUtils.fromString("usageRecord");
 
-    // Constants related to MPE Error
+    // Constants related to MPM Error
     String MPM_ERROR = "Error";
     String MPM_ERROR_DETAILS = "ErrorDetails";
     BString MPM_ERROR_DETAILS_HTTP_STATUS_CODE = StringUtils.fromString("httpStatusCode");
