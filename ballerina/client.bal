@@ -73,12 +73,12 @@ public isolated client class Client {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
     } external;
 
-    # Closes the AWS MPE client connection.
+    # Closes the AWS MPE client resources.
     # ```ballerina
     # check mpm->close();
     # ```
     # 
-    # + return - A `mpm:Error` if there is an error while closing the connection or else nil.
+    # + return - A `mpm:Error` if there is an error while closing the client resources or else nil.
     remote function close() returns Error? =
     @java:Method {
         'class: "io.ballerina.lib.aws.mpm.AwsMpmClient"
