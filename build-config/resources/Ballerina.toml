@@ -1,0 +1,19 @@
+[package]
+distribution = "2201.9.2"
+org = "ballerinax"
+name = "aws.marketplace.mpm"
+version = "@toml.version@"
+license= ["Apache-2.0"]
+authors = ["Ballerina"]
+keywords = ["AWS", "Marketplace", "Cloud/Billing", "Consumption Tracking"]
+icon = "icon.png"
+repository = "https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm"
+
+[platform.java17]
+graalvmCompatible = true
+
+[[platform.java17.dependency]]
+groupId = "io.ballerina.lib"
+artifactId = "aws.marketplace.mpm-native"
+version = "@project.version@"
+path = "../native/build/libs/aws.marketplace.mpm-native-@project.version@.jar"
