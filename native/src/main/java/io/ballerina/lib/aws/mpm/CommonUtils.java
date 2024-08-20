@@ -41,7 +41,6 @@ import software.amazon.awssdk.services.marketplacemetering.model.UsageRecord;
 import software.amazon.awssdk.services.marketplacemetering.model.UsageRecordResult;
 import software.amazon.awssdk.services.marketplacemetering.model.UsageRecordResultStatus;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -98,10 +97,11 @@ public final class CommonUtils {
         String customerIdentifier = bUsageRecord.getStringValue(Constants.MPM_USAGE_RECORD_CUSTOMER_IDFR).getValue();
         String dimension = bUsageRecord.getStringValue(Constants.MPM_USAGE_RECORD_DIMENSION).getValue();
         BArray timestamp = bUsageRecord.getArrayValue(Constants.MPM_USAGE_RECORD_TIMESTAMP);
+        Utc utcTimestamp = new Utc(timestamp);
         UsageRecord.Builder builder = UsageRecord.builder()
                 .customerIdentifier(customerIdentifier)
                 .dimension(dimension)
-                .timestamp(Instant.ofEpochSecond(timestamp.getInt(0)));
+                .timestamp(utcTimestamp.generateInstant());
         if (bUsageRecord.containsKey(Constants.MPM_USAGE_RECORD_QUANTITY)) {
             builder = builder.quantity(bUsageRecord.getIntValue(Constants.MPM_USAGE_RECORD_QUANTITY).intValue());
         }
