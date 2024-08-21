@@ -16,15 +16,19 @@
  * under the License.
  */
 
-module io.ballerina.lib.aws.mpm {
-    requires io.ballerina.runtime;
-    requires io.ballerina.lang.value;
-    requires io.ballerina.stdlib.time;
-    requires software.amazon.awssdk.auth;
-    requires software.amazon.awssdk.regions;
-    requires software.amazon.awssdk.services.marketplacemetering;
-    requires software.amazon.awssdk.awscore;
-    requires software.amazon.awssdk.core;
+package io.ballerina.lib.aws.mpm;
 
-    exports io.ballerina.lib.aws.mpm;
+import java.util.concurrent.ThreadFactory;
+
+/**
+ * A {@link ThreadFactory} object that creates new threads on demand for AWS MPM client network actions.
+ */
+public class AwsMpmThreadFactory implements ThreadFactory {
+
+    @Override
+    public Thread newThread(Runnable runnable) {
+        Thread networkThread = new Thread(runnable);
+        networkThread.setName("balx-awsmpm-client-network-thread");
+        return networkThread;
+    }
 }
