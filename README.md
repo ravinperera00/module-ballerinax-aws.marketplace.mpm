@@ -4,7 +4,7 @@
 [![Trivy](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/actions/workflows/trivy-scan.yml)
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/actions/workflows/build-with-bal-test-graalvm.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-aws.marketplace.mpm.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/commits/main)
-[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/aws.marketplace.mpm.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%aws.marketplace.mpm)
+[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/aws.marketplace.mpm.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Faws.marketplace.mpm)
 
 [AWS Marketplace Metering Service](https://docs.aws.amazon.com/marketplacemetering/latest/APIReference/Welcome.html) is
 a usage and billing service that allows AWS Marketplace sellers to report the usage of their products for
