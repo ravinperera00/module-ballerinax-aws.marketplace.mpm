@@ -19,7 +19,6 @@
 package io.ballerina.lib.aws.mpm;
 
 import io.ballerina.runtime.api.Environment;
-import io.ballerina.runtime.api.Future;
 import io.ballerina.runtime.api.values.BError;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BObject;
@@ -36,8 +35,6 @@ import software.amazon.awssdk.services.marketplacemetering.model.ResolveCustomer
 import software.amazon.awssdk.services.marketplacemetering.model.ResolveCustomerResponse;
 
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Representation of {@link software.amazon.awssdk.services.marketplacemetering.MarketplaceMeteringClient} with
@@ -45,7 +42,6 @@ import java.util.concurrent.Executors;
  */
 public final class NativeClientAdaptor {
     private static final String NATIVE_CLIENT = "nativeClient";
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool(new AwsMpmThreadFactory());
 
     private NativeClientAdaptor() {
     }
@@ -94,22 +90,20 @@ public final class NativeClientAdaptor {
      */
     public static Object resolveCustomer(Environment env, BObject bAwsMpmClient, BString registrationToken) {
         MarketplaceMeteringClient nativeClient = (MarketplaceMeteringClient) bAwsMpmClient.getNativeData(NATIVE_CLIENT);
-        Future future = env.markAsync();
-        EXECUTOR_SERVICE.execute(() -> {
+        return env.yieldAndRun(() -> {
             try {
                 ResolveCustomerRequest resolveCustomerReq = ResolveCustomerRequest.builder()
                         .registrationToken(registrationToken.getValue()).build();
                 ResolveCustomerResponse nativeResponse = nativeClient.resolveCustomer(resolveCustomerReq);
                 BMap<BString, Object> bResponse = CommonUtils.getBResolveCustomerResponse(nativeResponse);
-                future.complete(bResponse);
+                return bResponse;
             } catch (Exception e) {
                 String errorMsg = String.format("Error occurred while executing resolve customer operation: %s",
                         e.getMessage());
                 BError bError = CommonUtils.createError(errorMsg, e);
-                future.complete(bError);
+                return bError;
             }
         });
-        return null;
     }
 
     /**
@@ -124,20 +118,18 @@ public final class NativeClientAdaptor {
     public static Object batchMeterUsage(Environment env, BObject bAwsMpmClient, BMap<BString, Object> request) {
         MarketplaceMeteringClient nativeClient = (MarketplaceMeteringClient) bAwsMpmClient.getNativeData(NATIVE_CLIENT);
         BatchMeterUsageRequest nativeRequest = CommonUtils.getNativeBatchMeterUsageRequest(request);
-        Future future = env.markAsync();
-        EXECUTOR_SERVICE.execute(() -> {
+        return env.yieldAndRun(() -> {
             try {
                 BatchMeterUsageResponse nativeResponse = nativeClient.batchMeterUsage(nativeRequest);
                 BMap<BString, Object> bResponse = CommonUtils.getBBatchMeterUsageResponse(nativeResponse);
-                future.complete(bResponse);
+                return bResponse;
             } catch (Exception e) {
                 String errorMsg = String.format("Error occurred while executing batch-meter-usage operation: %s",
                         e.getMessage());
                 BError bError = CommonUtils.createError(errorMsg, e);
-                future.complete(bError);
+                return bError;
             }
         });
-        return null;
     }
 
     /**
