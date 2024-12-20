@@ -15,8 +15,8 @@ graalvmCompatible = true
 [[platform.java17.dependency]]
 groupId = "io.ballerina.lib"
 artifactId = "aws.marketplace.mpm-native"
-version = "0.1.1-SNAPSHOT"
-path = "../native/build/libs/aws.marketplace.mpm-native-0.1.1-SNAPSHOT.jar"
+version = "0.1.1"
+path = "../native/build/libs/aws.marketplace.mpm-native-0.1.1.jar"
 
 [[platform.java17.dependency]]
 groupId = "io.ballerina.stdlib"
