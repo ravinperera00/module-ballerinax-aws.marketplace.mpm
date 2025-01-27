@@ -2,7 +2,7 @@
 distribution = "2201.11.0-20241117-133400-a3054b77"
 org = "ballerinax"
 name = "aws.marketplace.mpm"
-version = "0.1.1"
+version = "0.2.0"
 license= ["Apache-2.0"]
 authors = ["Ballerina"]
 keywords = ["AWS", "Marketplace", "Cloud/Billing", "Consumption Tracking"]
